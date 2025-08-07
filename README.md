@@ -10,7 +10,27 @@ A repository with the source code to extract and structure the data from the Cat
 
 ## Running the scripts
 
+First download the book in the `src` folder with the command
 
+```bash
+curl -o src/book.pdf https://www.planta.ngo/wp-content/uploads/2024/12/Catalogo-de-las-Plantas-de-Cuba-2024.pdf
+```
+
+To run with docker 
+
+```bash
+chmod +x run.sh
+docker compose up
+```
+
+To run with python make sure to install the requirement before executing the scripts
+
+```bash
+pip3 install -r requirements.txt
+cd src
+python3 extract.py
+python3 process.py
+```
 
 ## Results
 

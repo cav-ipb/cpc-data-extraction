@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  python-app:
+    image: python:3.12
+    container_name: cpc_extraction_pipeline
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["sh", "./run.sh"]

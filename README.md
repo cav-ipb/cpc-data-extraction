@@ -125,6 +125,12 @@ The data produced by the scripts can be found in the `src/data` directory, there
     
     ```
 
+## References
+
+```
+García-Beltrán, J.A., Bécquer, E.R., Gómez-Hechavarría, J.L. & González-Torres, L.R. (ed.). 2024. Catálogo de las Plantas de Cuba. Planta! – Plantlife Conservation Society, Vancouver. https://doi.org/10.70925/cat.2024
+```
+
 ## Legal notice
 
 The repository is released under the MIT license, notice that the book's content are released under the Creative Commons Attribution License 4.0 (CC BY 4.0) and thus the use of any data produced of that work (by this code or any other) must comply with those terms and conditions.

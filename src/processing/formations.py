@@ -76,6 +76,44 @@ formations_en = [
     'segetal vegetation'
 ]
 
+formations_acronyms = [
+    "BN",
+    "BPba",
+    "BPlm",
+    "BPl",
+    "BSVme",
+    "BSVmi",
+    "BSV",
+    "BSDme",
+    "BSDmi",
+    "BSD",
+    "BCi",
+    "BG",
+    "BMa",
+    "BPll",
+    "BPim",
+    "BPi",
+    "MTXCSc",
+    "MXES",
+    "MXSS",
+    "MM",
+    "CAAD",
+    "HbAR",
+    "HbCP",
+    "CHa",
+    "PMa",
+    "CVCar",
+    "CVCroc",
+    "CVMo",
+    "BSec",
+    "MTSc",
+    "SabS",
+    "SabAnt",
+    "Sab",
+    "VgRud",
+    "VgSeg"
+]
+
 formations_class = ['forests or tree formations'] * 16 + ['thickets or shrub formations'] * 4 + ['herbaceous formations'] * 5 + ['vegetation complex'] * 3 + ['secondary vegetation'] * 7
 
 formations_all = [
@@ -151,7 +189,7 @@ errors = {
 
 
 assert len(formations_en) ==len(formations_es) == len(formations_class)
-formations_table = [{'id': i, 'name_es' : es, 'name_en': en, 'classification': cat} for i, (es, en, cat) in enumerate(zip(formations_es, formations_en, formations_class))]
+formations_table = [{'id': i, 'name_es' : es, 'name_en': en, 'acronym': a, 'classification': cat} for i, (es, en, a, cat) in enumerate(zip(formations_es, formations_en, formations_acronyms, formations_class))]
 formations_index = dict([(f,i) for (i,f) in enumerate(formations_es)])
 
 def parse_formations(string:str) -> list[str]:

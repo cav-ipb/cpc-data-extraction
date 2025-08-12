@@ -76,43 +76,67 @@ formations_en = [
     'segetal vegetation'
 ]
 
-formations_acronyms = [
-    "BN",
-    "BPba",
-    "BPlm",
-    "BPl",
-    "BSVme",
-    "BSVmi",
-    "BSV",
-    "BSDme",
-    "BSDmi",
-    "BSD",
-    "BCi",
-    "BG",
-    "BMa",
-    "BPll",
-    "BPim",
-    "BPi",
-    "MTXCSc",
-    "MXES",
-    "MXSS",
-    "MM",
-    "CAAD",
-    "HbAR",
-    "HbCP",
-    "CHa",
-    "PMa",
-    "CVCar",
-    "CVCroc",
-    "CVMo",
-    "BSec",
-    "MTSc",
-    "SabS",
-    "SabAnt",
-    "Sab",
-    "VgRud",
-    "VgSeg"
-]
+terms_acronyms = {
+    'acuáticas': 'Ac',
+    'agua': 'Ag',
+    'altitud': 'Al',
+    'antrópicas': 'Ant',
+    'arenosa': 'Ar',
+    'arroyos': 'Ay',
+    'baja': 'Ba',
+    'bosque': 'B',
+    'ciénaga': 'Ci',
+    'complejo': 'Cp',
+    'comunidades': 'Cm',
+    'costa': 'C',
+    'costero': 'Co',
+    'dulce': 'D',
+    'espinoso': 'E',
+    'galería': 'G',
+    'halófitas': 'Ha',
+    'herbazal': 'Hb',
+    'llanuras': 'L',
+    'mangles': 'Man',
+    'marinos': 'Ma',
+    'matorral': 'Mt',
+    'mesófilo': 'Me',
+    'microfilo': 'Mi',
+    'mogotes': 'Mg',
+    'montano': 'Mn',
+    'nublado': 'N',
+    'orillas': 'O',
+    'pantano': 'Pn',
+    'pastos': 'Ps',
+    'pinos': 'Pi',
+    'pluvial': 'Pl',
+    'rocosa': 'Ro',
+    'ruderal': 'Ru',
+    'ríos': 'R',
+    'sabanas': 'Sab',
+    'secundario': 'Sec',
+    'segetal': 'Sgt',
+    'semideciduo': 'Sd',
+    'seminaturales': 'Sn',
+    'serpentina': 'Sp',
+    'siempreverde': 'Sv',
+    'subcostero': 'Sc',
+    'subespinoso': 'Se',
+    'vegetación': 'Vg',
+    'xeromorfo': 'X'
+}
+
+
+formations_acronyms = []
+
+for f in formations_es:
+    a = ""
+    for word in f.split(' '):
+        try:
+            a += terms_acronyms[word]
+        except KeyError:
+            pass
+    formations_acronyms.append(a)
+
 
 formations_class = ['forests or tree formations'] * 16 + ['thickets or shrub formations'] * 4 + ['herbaceous formations'] * 5 + ['vegetation complex'] * 3 + ['secondary vegetation'] * 7
 

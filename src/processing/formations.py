@@ -138,7 +138,8 @@ for f in formations_es:
     formations_acronyms.append(a)
 
 
-formations_class = ['forests or tree formations'] * 16 + ['thickets or shrub formations'] * 4 + ['herbaceous formations'] * 5 + ['vegetation complex'] * 3 + ['secondary vegetation'] * 7
+formations_class_en = ['forests or tree formations'] * 16 + ['thickets or shrub formations'] * 4 + ['herbaceous formations'] * 5 + ['vegetation complex'] * 3 + ['secondary vegetation'] * 7
+formations_class_es = ['bosques o formaciones arbóreas'] * 16 + ['matorrales o formaciones arbustivas'] * 4 + ['herbazales o formaciones herbáceas'] * 5 + ['complejos de vegetación'] * 3 + ['vegetación secundaria'] * 7
 
 formations_all = [
     'bosque nublado',
@@ -212,8 +213,8 @@ errors = {
 }
 
 
-assert len(formations_en) ==len(formations_es) == len(formations_class)
-formations_table = [{'id': i, 'name_es' : es, 'name_en': en, 'acronym': a, 'classification': cat} for i, (es, en, a, cat) in enumerate(zip(formations_es, formations_en, formations_acronyms, formations_class))]
+assert len(formations_en) ==len(formations_es) == len(formations_class_en)
+formations_table = [{'id': i, 'name_es' : es, 'name_en': en, 'acronym': a, 'classification_es': cls_es, 'classification_en': cls_en} for i, (es, en, a, cls_es, cls_en) in enumerate(zip(formations_es, formations_en, formations_acronyms, formations_class_es , formations_class_en))]
 formations_index = dict([(f,i) for (i,f) in enumerate(formations_es)])
 
 def parse_formations(string:str) -> list[str]:

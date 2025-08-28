@@ -18,12 +18,14 @@ taxons = []
 taxon_synonyms = []
 taxon_formations = []
 taxon_distributions = []
+taxon_names = []
+idgen = IdGenerator()
 
 for family, ts in data.items():
 
     for taxon in ts:
 
-        name, synonyms = parse_names(taxon['name'])
+        namesx = parse_names(taxon['name'], idgen)
         formations = normalize_formations(parse_formations(taxon['formation']))
         
         distributions = []
@@ -33,10 +35,9 @@ for family, ts in data.items():
             pass
 
 
-        taxons.append({'id': c, 'page_number': taxon['page_number'], 'family': family, 'name': name})
-        for s in synonyms:
-            s['taxonid'] = c
-            taxon_synonyms.append(s)
+        taxons.append({'id': c, 'page_number': taxon['page_number'], 'family': family, 'nameid': namesx[0].id})
+        for s in namesx:
+            taxon_names.append(s.__dict__)
 
         if formations:
             for f in formations:
@@ -51,8 +52,22 @@ for family, ts in data.items():
         c+=1
 
 
+chunk_size = 4000
+iters = len(taxon_names) // chunk_size + 1
+names_details = []
+
+for i in range(iters):
+    start = i * chunk_size
+    end = start + chunk_size
+    if start >= len(taxon_names):
+        break
+    names_details.extend(use_name_parser(taxon_names[start:min(end, len(taxon_names) - 1)]))
+
+
+
 taxons_df = pd.DataFrame(taxons)
-taxon_synonyms_df = pd.DataFrame(taxon_synonyms)
+taxon_names_df = pd.DataFrame(taxon_names)
+names_details_df = pd.DataFrame(names_details)
 taxon_formations_df = pd.DataFrame(taxon_formations)
 formations_df = pd.DataFrame(formations_table)
 taxon_locations_df = pd.DataFrame(taxon_distributions)
@@ -60,7 +75,8 @@ locations_df = pd.DataFrame(locations)
 
 
 taxons_df.to_csv(f'{processed_path}/taxons.tsv', sep='\t', index=False)
-taxon_synonyms_df.to_csv(f'{processed_path}/taxons_synonyms.tsv', sep='\t', index=False)
+taxon_names_df.to_csv(f'{processed_path}/taxons_names.tsv', sep='\t', index=False)
+names_details_df.to_csv(f'{processed_path}/names_details.tsv', sep='\t', index=False)
 taxon_formations_df.to_csv(f'{processed_path}/taxons_formations.tsv', sep='\t', index=False)
 formations_df.to_csv(f'{processed_path}/formations.tsv', sep='\t', index=False)
 taxon_locations_df.to_csv(f'{processed_path}/taxons_locations.tsv', sep='\t', index=False)

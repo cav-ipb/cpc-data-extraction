@@ -224,6 +224,9 @@ def parse_formations(string:str) -> list[str]:
     opar = False
     text = ''
     for c in temp:
+        if c == '\n':
+            continue
+
         if c == '(':
             opar = True
         if c == ')':

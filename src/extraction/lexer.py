@@ -29,6 +29,9 @@ def get_tokens(stream):
         if 55 > char['y0'] or char['y0'] > 750:
             continue
 
+        if last_page and last_page < char['page_number']:
+            tokens.append(Token(last_page, Symbols.EOL, Symbols.EOL, None, None, tokens[-1].line))
+
         try:
             typex = Symbols[ord(char['text'])] 
             # print(typex)
@@ -56,10 +59,6 @@ def get_tokens(stream):
             start = None
 
         except SymbolNotFoundError:
-            # if char['text'] == '.':
-            #     text += char['text']
-            #     continue
-                
             text += char['text']
             last_font = char['fontname'] if char['fontname'] else last_font
             last_size = char['size']

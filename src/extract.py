@@ -54,7 +54,11 @@ for i in range(len(items)):
     print(str(i) + ' --- ' + items[i][0])
     results[items[i][0]] = plants
     if (i != 223):
-        assert len(plants) == total
+        try:
+            assert len(plants) == total
+        except:
+            print(f'expected {total} found {len(plants)}')
+            break
 
 with open(f'{path}/raw_data.json', 'w') as f:
     json.dump(results, f)

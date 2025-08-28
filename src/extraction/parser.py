@@ -78,13 +78,15 @@ def get_plants(tokens):
 
     section = None
     text = ''
-    page = None
+    eol_count = 0
 
     for i in range(len(tokens)):
         token = tokens[i]
 
         if token.type == Symbols.EOL:
+            eol_count += 1
             last_type = Symbols.EOL
+            text += '\n'
             continue
 
         # plant sections end with Reference section
@@ -104,7 +106,7 @@ def get_plants(tokens):
             elif section == Sections.NAME:
                 text += token.text
 
-            elif section != Sections.NAME and (token.type == Literals.BOLD_ITALIC or (token.type == Symbols.OPEN_SQUARE_BRACKET and tokens[i + 1].type == Literals.BOLD_ITALIC)):
+            elif section != Sections.NAME and (section not in [Sections.DISCUSSION, Sections.DISCUSSION1, Sections.DISCUSSION2] or eol_count > 1) and (token.type == Literals.BOLD_ITALIC or (token.type == Symbols.OPEN_SQUARE_BRACKET and tokens[i + 1].type == Literals.BOLD_ITALIC)):
                 
                 if section:
                     plant[section] = text
@@ -126,6 +128,9 @@ def get_plants(tokens):
             text += token.text
             
             last_type = token.type
+        
+        if token.type not in [Symbols.EOL, Symbols.WSPACE]:
+            eol_count = 0
 
     if section:
         plant[section] = text
